@@ -1,0 +1,11 @@
+<section class="about section" *ngFor="let p of posts">
+  <div class="section-inner">
+    <h2 class="heading">{{ p.title }}</h2>
+    <div class="content">
+      {{ p.perex }}
+    </div><!--//content-->
+    <div class="text-right">
+    <a class="more-link" [routerLink]="['/posts', p.id]" >Read more...</a>
+    </div>
+    </div><!--//section-inner-->
+</section><!--//section-->

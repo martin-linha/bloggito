@@ -1,0 +1,11 @@
+<section class="about section">
+  <div class="section-inner">
+    <h2 class="heading">{{ post.title }}</h2>
+    <div class="perex">
+      {{ post.perex }}
+    </div>
+    <hr class="divider"/>
+    <div class="content" [innerHTML]="post.content">
+    </div><!--//content-->
+  </div><!--//section-inner-->
+</section><!--//section-->

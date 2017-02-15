@@ -1,0 +1,22 @@
+<section class="about section">
+  <div class="section-inner">
+    <div class="content">
+
+      <form (ngSubmit)="savePost()">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newPost.title" required>
+        </div>
+        <div class="form-group">
+          <label for="perex">Perex</label>
+          <input type="text" class="form-control" id="perex" name="perex" [(ngModel)]="newPost.perex">
+        </div>
+        <div class="form-group">
+          <label>Content</label>
+          <div id="summernote"></div>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>

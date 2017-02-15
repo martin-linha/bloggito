@@ -1,0 +1,19 @@
+plugins {
+  id "com.moowork.node" version "1.1.1"
+}
+
+
+task run {
+
+}
+
+node {
+  version = '6.4.0'
+  npmVersion = '3.10.6'
+  download = true
+  workDir = file("${project.projectDir}/node")
+  nodeModulesDir = file("${project.projectDir}/")
+}
+
+run.dependsOn npm_start
+npm_start.dependsOn npmInstall
