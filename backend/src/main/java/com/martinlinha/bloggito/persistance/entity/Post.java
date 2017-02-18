@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by martinlinha on 23.01.17.
@@ -11,12 +12,29 @@ import java.util.Date;
 @Entity
 public class Post extends AbstractEntity {
     private String title;
-    @Lob
     private String content;
     private String perex;
     private Date postedOn;
     @ManyToOne
     private Post creator;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    public Post getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Post creator) {
+        this.creator = creator;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     @PrePersist
     public void prePersist() {

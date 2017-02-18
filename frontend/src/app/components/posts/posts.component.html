@@ -2,7 +2,7 @@
   <div class="section-inner">
     <div class="post">
       <a [routerLink]="['/posts', p.id]"><h2 class="heading">{{ p.title }}</h2></a>
-      <div class="description">{{ p.postedOn | date:'dd.MM.yyyy' }}</div>
+      <div class="description">{{ p.postedOn | date:'dd.MM.yyyy' }}, 0 comments</div>
     </div>
     <hr class="divider"/>
     <div class="content">

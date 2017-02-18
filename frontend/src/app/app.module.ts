@@ -8,6 +8,7 @@ import {AppComponent} from './app.component';
 import {PostsComponent} from './components/posts/posts.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import {AddPostComponent} from "./components/add-post/add-post.component";
+import { CommentsComponent } from './components/comments/comments.component';
 
 const appRoutes: Routes = [{path: '', component: PostsComponent},
   {path: 'posts/:id', component: PostDetailComponent},
@@ -18,7 +19,8 @@ const appRoutes: Routes = [{path: '', component: PostsComponent},
     AppComponent,
     PostsComponent,
     PostDetailComponent,
-    AddPostComponent
+    AddPostComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

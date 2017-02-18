@@ -1,0 +1,44 @@
+<h4>Comments</h4>
+<div class="comments">
+  <div class="comment">
+    <img src="../../../assets/images/profile.png" width="60px"/>
+    <div class="description">
+      <span class="author"><a href="mailto:martin@goole.com">Martin Linha</a></span>
+      <br/>
+      <span class="date">25.12.2009</span>
+    </div>
+    <div class="content">
+      <p>asd</p>
+    </div>
+  </div>
+  <div class="comment">
+    <img src="../../../assets/images/profile.png" width="60px"/>
+    <div class="description">
+      <span class="author"><a href="mailto:martin@goole.com">Martin Linha</a></span>
+      <br/>
+      <span class="date">25.12.2009</span>
+    </div>
+    <div class="content">
+      <p>asd</p>
+    </div>
+  </div>
+  <h5>Post a comment</h5>
+  <div class="addpost">
+    <form (ngSubmit)="save()">
+      <div class="form-group">
+        <label for="author">Name</label>
+        <input type="text" class="form-control" id="author" name="author" [(ngModel)]="comment.author" required>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="comment.email">
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea type="text" class="form-control" id="content" name="content" [(ngModel)]="comment.content" ></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+</div>
+

@@ -494,6 +494,38 @@ iframe {
 .languages .item .fa {
   color: #79d19a;
 }
+/* Comments */
+.comments .comment {
+  margin-left: 20px;
+  margin-bottom: 25px;
+}
+.comments .comment img {
+  position: absolute;
+}
+.comments .comment .description {
+  height: 60px;
+  padding-left: 65px;
+}
+.comments .comment .content {
+  padding-left: 65px;
+}
+.comments .comment .description .author {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #778492;
+}
+.comments .comment .content .date {
+  color: #939ea9;
+  font-weight: 600;
+  font-size: 12px;
+}
+.comments .addpost label {
+  font-size: 10px;
+}
+.comments .addpost input {
+  width: 40%;
+}
 /* Blog Section */
 .blog .item {
   margin-bottom: 30px;
