@@ -23,6 +23,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> getPostsDateDesc() {
+        return postDao.getPostsDateDesc();
+    }
+
+    @Override
     public Post save(Post post) {
         return postDao.save(post);
     }

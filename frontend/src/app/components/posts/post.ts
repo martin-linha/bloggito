@@ -5,6 +5,8 @@ export class Post {
     public perex: string;
     public title: string;
     public creator: string;
+    public postedOn: Date;
 
-  constructor() {}
+  constructor() {
+  }
 }

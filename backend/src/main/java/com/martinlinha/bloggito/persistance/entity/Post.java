@@ -1,10 +1,9 @@
 package com.martinlinha.bloggito.persistance.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
+import java.util.Date;
 
 /**
  * Created by martinlinha on 23.01.17.
@@ -12,10 +11,17 @@ import javax.validation.constraints.Max;
 @Entity
 public class Post extends AbstractEntity {
     private String title;
+    @Lob
     private String content;
     private String perex;
+    private Date postedOn;
     @ManyToOne
     private Post creator;
+
+    @PrePersist
+    public void prePersist() {
+        postedOn = new Date();
+    }
 
     public String getTitle() {
         return title;
@@ -39,5 +45,13 @@ public class Post extends AbstractEntity {
 
     public void setPerex(String perex) {
         this.perex = perex;
+    }
+
+    public Date getPostedOn() {
+        return postedOn;
+    }
+
+    public void setPostedOn(Date postedOn) {
+        this.postedOn = postedOn;
     }
 }

@@ -182,12 +182,30 @@ iframe {
   color: #545e69;
   font-size: 24px;
 }
+
+.section .post .heading {
+  margin-bottom: 0;
+}
+
 .section .perex {
   font-weight: bold;
+  margin-bottom: 20px;
 }
+
+.section .description {
+  color: #778492;
+  font-size: 12px;
+}
+
+.section .content .more-link {
+  margin-right: 5px;
+  float: right;
+  font-size: 12px;
+}
+
 .section .content .more-link .fa {
   margin-right: 5px;
-  font-size: 14px;
+  font-size: 12px;
 }
 /* About Section */
 /* Latest Section */
@@ -386,6 +404,30 @@ iframe {
   height: 15px;
   background: #66cb8c;
 }
+/* Certifications section */
+.certifications .item {
+  margin-bottom: 30px;
+}
+.certifications .item img {
+  position: absolute;
+}
+.certifications .description {
+  padding-left: 65px;
+}
+.certifications .item:last-child {
+  margin-bottom: 0;
+}
+.certifications .item {
+  font-size: 14px;
+  font-weight: 500;
+}
+.certifications .item .name {
+  color: #939ea9;
+  font-weight: 600;
+}
+.certifications .item .license {
+  color: #999;
+}
 /* Testimonials section */
 .testimonials .item {
   margin-bottom: 30px;
@@ -405,7 +447,6 @@ iframe {
 }
 .testimonials .item .source {
   font-size: 14px;
-  padding-left: 30px;
   font-weight: 500;
 }
 .testimonials .item .source .name {

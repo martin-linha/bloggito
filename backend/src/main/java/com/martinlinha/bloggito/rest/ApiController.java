@@ -17,7 +17,7 @@ public class ApiController {
 
     @GetMapping(value = "/posts")
     public Iterable<Post> getPosts() {
-        return postService.getAllPosts();
+        return postService.getPostsDateDesc();
     }
 
     @PostMapping(value = "/posts")

@@ -11,6 +11,8 @@ public interface PostService {
 
     public Iterable<Post> getAllPosts();
 
+    public List<Post> getPostsDateDesc();
+
     public Post save(Post post);
 
     public Post findById(long id);
