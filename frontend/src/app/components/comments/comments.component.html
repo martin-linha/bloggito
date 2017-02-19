@@ -1,7 +1,7 @@
 <h4>Comments</h4>
 <div class="comments">
   <div class="comment" *ngFor="let c of post.comments">
-    <img src="../../../assets/images/profile.png" width="60px"/>
+    <img gravatar [email]="c.email" [size]="60">
     <div class="description">
       <span class="author">
         <a *ngIf="c.email" href="mailto:{{ c.email }}">{{ c.author }}</a>

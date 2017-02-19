@@ -207,6 +207,16 @@ iframe {
   margin-right: 5px;
   font-size: 12px;
 }
+.certifications .content .more-link {
+  margin-right: 5px;
+  float: right;
+  font-size: 12px;
+}
+
+.section .content .more-link .fa {
+  margin-right: 5px;
+  font-size: 12px;
+}
 /* About Section */
 /* Latest Section */
 .latest .item {
@@ -501,6 +511,7 @@ iframe {
 }
 .comments .comment img {
   position: absolute;
+  border-radius: 50%;
 }
 .comments .comment .description {
   height: 60px;

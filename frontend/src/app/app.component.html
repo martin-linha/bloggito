@@ -21,7 +21,7 @@
 <div class="container sections-wrapper">
   <div class="row">
     <div class="primary col-md-8 col-sm-12 col-xs-12">
-      <router-outlet></router-outlet>
+      <router-outlet (certificationAdded)="getCertifications()"></router-outlet>
 
       <!--<section class="projects section">-->
       <!--<div class="section-inner">-->
@@ -95,7 +95,7 @@
             <ul class="list-unstyled">
               <li><i class="fa fa-map-marker"></i><span class="sr-only">Location:</span>Zürich, Switzerland</li>
               <li><i class="fa fa-envelope-o"></i><span class="sr-only">Email:</span><a
-                href="#">martin.linha6@avaloq.com</a></li>
+                href="#">martin.linha6@gmail.com</a></li>
               <li><i class="fa fa-link"></i><span class="sr-only">Website:</span><a href="#">http://www.martinlinha.com</a>
               </li>
             </ul>
@@ -103,58 +103,7 @@
         </div><!--//section-inner-->
       </aside><!--//aside-->
 
-      <aside class="certifications aside section">
-        <div class="section-inner">
-          <h2 class="heading">Certifications</h2>
-          <div class="content">
-            <div class="item">
-              <img src="../assets/images/oracle-logo.png" />
-              <div class="description">
-                <span class="name">Oracle Certified Associate, Java SE 7 Programmer</span><br/><span
-                class="license">Oracle, 1z0-803</span>
-              </div>
-            </div>
-            <div class="item">
-              <img src="../assets/images/oracle-logo.png" />
-              <div class="description">
-                <span class="name">
-                Oracle Certified Professional, Java SE 7 Programmer</span><br/><span
-                class="license">Oracle, 1z0-804</span>
-              </div>
-            </div>
-            <div class="item">
-              <img src="../assets/images/oracle-logo.png" />
-              <div class="description">
-                <span class="name">Oracle Certified Professional, Java SE 8 Programmer (upgrade)</span><br/><span
-                class="license">Oracle, 1z0-810</span>
-              </div>
-            </div>
-            <div class="item">
-              <img src="../assets/images/oracle-logo.png" />
-              <div class="description">
-                <span class="name">Oracle Certified Expert, Java EE 6 Web Component Developer</span><br/><span
-                class="license">Oracle, 1z0-899</span>
-              </div>
-            </div>
-            <div class="item">
-              <img src="../assets/images/oracle-logo.png" />
-              <div class="description">
-                <span class="name">Oracle Certified Expert, EE 6 Java Persistence API Developer</span><br/><span
-                class="license">Oracle, 1z0-898</span>
-              </div>
-            </div>
-            <div class="item">
-              <img src="../assets/images/avaloq-logo.png" />
-              <div class="description">
-                <span class="name">Avaloq Certified Professional</span><br/><span
-                class="license">Avaloq</span>
-              </div>
-            </div>
-            <p><a class="more-link" href="#"><i class="fa fa-external-link"></i> More on Linkedin</a></p>
-          </div>
-        </div>
-      </aside>
-
+      <app-certifications [certifications]="certifications"></app-certifications>
       <!--<aside class="skills aside section">-->
         <!--<div class="section-inner">-->
           <!--<h2 class="heading">Skills</h2>-->
@@ -222,27 +171,27 @@
         </div><!--//section-inner-->
       </aside><!--//section-->
 
-      <aside class="languages aside section">
-        <div class="section-inner">
-          <h2 class="heading">Languages</h2>
-          <div class="content">
-            <ul class="list-unstyled">
-              <li class="item">
-                <span class="title"><strong>English:</strong></span>
-                <span class="level">Native Speaker <br class="visible-xs"/><i class="fa fa-star"></i> <i
-                  class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                  class="fa fa-star"></i> </span>
-              </li><!--//item-->
-              <li class="item">
-                <span class="title"><strong>Spanish:</strong></span>
-                <span class="level">Professional Proficiency <br class="visible-sm visible-xs"/><i
-                  class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                  class="fa fa-star-half"></i></span>
-              </li><!--//item-->
-            </ul>
-          </div><!--//content-->
-        </div><!--//section-inner-->
-      </aside><!--//section-->
+      <!--<aside class="languages aside section">-->
+        <!--<div class="section-inner">-->
+          <!--<h2 class="heading">Languages</h2>-->
+          <!--<div class="content">-->
+            <!--<ul class="list-unstyled">-->
+              <!--<li class="item">-->
+                <!--<span class="title"><strong>English:</strong></span>-->
+                <!--<span class="level">Native Speaker <br class="visible-xs"/><i class="fa fa-star"></i> <i-->
+                  <!--class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i-->
+                  <!--class="fa fa-star"></i> </span>-->
+              <!--</li>&lt;!&ndash;//item&ndash;&gt;-->
+              <!--<li class="item">-->
+                <!--<span class="title"><strong>Spanish:</strong></span>-->
+                <!--<span class="level">Professional Proficiency <br class="visible-sm visible-xs"/><i-->
+                  <!--class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i-->
+                  <!--class="fa fa-star-half"></i></span>-->
+              <!--</li>&lt;!&ndash;//item&ndash;&gt;-->
+            <!--</ul>-->
+          <!--</div>&lt;!&ndash;//content&ndash;&gt;-->
+        <!--</div>&lt;!&ndash;//section-inner&ndash;&gt;-->
+      <!--</aside>&lt;!&ndash;//section&ndash;&gt;-->
     </div><!--//secondary-->
   </div><!--//row-->
 </div><!--//masonry-->

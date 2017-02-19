@@ -30,11 +30,11 @@ export class PostsComponent implements OnInit {
   }
 
   savePost() {
-    this.http.post('http://localhost:8080/api/posts', this.newPost)
-      .toPromise()
-      .then(resp => {
-        console.log(resp.statusText);
-        this.getPosts()
-      });
+      this.http.post('http://localhost:8080/api/posts', this.newPost)
+        .toPromise()
+        .then(resp => {
+          console.log(resp.statusText);
+          this.getPosts()
+        });
   }
 }
