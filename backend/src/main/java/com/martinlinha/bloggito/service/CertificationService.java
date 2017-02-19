@@ -7,9 +7,6 @@ import java.util.List;
 /**
  * Created by martinlinha on 19.02.17.
  */
-public interface CertificationService {
+public interface CertificationService extends AbstractCrudService<Certification, Long>{
 
-    public Certification save(Certification certification);
-
-    public Iterable<Certification> getCertifications();
 }

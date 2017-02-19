@@ -6,6 +6,7 @@ import com.martinlinha.bloggito.persistance.entity.Comment;
 import com.martinlinha.bloggito.persistance.entity.Post;
 import com.martinlinha.bloggito.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,7 +15,7 @@ import javax.transaction.Transactional;
  * Created by martinlinha on 18.02.17.
  */
 @Service
-public class CommentServiceImpl implements CommentService {
+public class CommentServiceImpl extends AbstractCrudServiceImpl<Comment, Long> implements CommentService {
 
     @Autowired
     private CommentDao commentDao;
@@ -22,8 +23,8 @@ public class CommentServiceImpl implements CommentService {
     private PostDao postDao;
 
     @Override
-    public Comment save(Comment comment) {
-        return commentDao.save(comment);
+    CrudRepository<Comment, Long> getRepository() {
+        return commentDao;
     }
 
     @Transactional

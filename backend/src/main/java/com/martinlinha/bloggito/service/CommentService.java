@@ -5,9 +5,7 @@ import com.martinlinha.bloggito.persistance.entity.Comment;
 /**
  * Created by martinlinha on 18.02.17.
  */
-public interface CommentService {
+public interface CommentService extends AbstractCrudService<Comment, Long> {
 
-    public Comment save(Comment comment);
-
-    public Comment saveCommentToPost(Comment comment, Long id);
+    Comment saveCommentToPost(Comment comment, Long id);
 }

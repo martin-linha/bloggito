@@ -7,14 +7,7 @@ import java.util.List;
 /**
  * Created by martinlinha on 23.01.17.
  */
-public interface PostService {
+public interface PostService extends AbstractCrudService<Post, Long> {
 
-    public Iterable<Post> getAllPosts();
-
-    public List<Post> getPostsDateDesc();
-
-    public Post save(Post post);
-
-    public Post findById(long id);
-
+    List<Post> getPostsDateDesc();
 }

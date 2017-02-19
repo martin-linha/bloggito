@@ -25,6 +25,6 @@ public class CertificationController {
 
     @GetMapping("/certifications")
     public Iterable<Certification> getAllCertifications() {
-        return certificationService.getCertifications();
+        return certificationService.findAll();
     }
 }

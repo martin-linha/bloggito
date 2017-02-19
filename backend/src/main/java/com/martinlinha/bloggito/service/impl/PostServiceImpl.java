@@ -4,6 +4,7 @@ import com.martinlinha.bloggito.persistance.dao.PostDao;
 import com.martinlinha.bloggito.persistance.entity.Post;
 import com.martinlinha.bloggito.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,28 +14,18 @@ import java.util.List;
  * Created by martinlinha on 23.01.17.
  */
 @Service
-public class PostServiceImpl implements PostService {
+public class PostServiceImpl extends AbstractCrudServiceImpl<Post, Long> implements PostService {
 
     @Autowired
     private PostDao postDao;
 
     @Override
-    public Iterable<Post> getAllPosts() {
-        return postDao.findAll();
+    CrudRepository<Post, Long> getRepository() {
+        return postDao;
     }
 
     @Override
     public List<Post> getPostsDateDesc() {
         return postDao.getPostsDateDesc();
-    }
-
-    @Override
-    public Post save(Post post) {
-        return postDao.save(post);
-    }
-
-    @Override
-    public Post findById(long id) {
-        return postDao.findOne(id);
     }
 }
