@@ -1,25 +1,17 @@
 <h4>Comments</h4>
 <div class="comments">
-  <div class="comment">
+  <div class="comment" *ngFor="let c of post.comments">
     <img src="../../../assets/images/profile.png" width="60px"/>
     <div class="description">
-      <span class="author"><a href="mailto:martin@goole.com">Martin Linha</a></span>
+      <span class="author">
+        <a *ngIf="c.email" href="mailto:{{ c.email }}">{{ c.author }}</a>
+        {{ !c.email ? c.author : '' }}
+      </span>
       <br/>
-      <span class="date">25.12.2009</span>
+      <span class="date">{{ c.createdOn | date:"dd.MM.yyyy HH:mm:ss"  }}</span>
     </div>
     <div class="content">
-      <p>asd</p>
-    </div>
-  </div>
-  <div class="comment">
-    <img src="../../../assets/images/profile.png" width="60px"/>
-    <div class="description">
-      <span class="author"><a href="mailto:martin@goole.com">Martin Linha</a></span>
-      <br/>
-      <span class="date">25.12.2009</span>
-    </div>
-    <div class="content">
-      <p>asd</p>
+      <p>{{ c.content }}</p>
     </div>
   </div>
   <h5>Post a comment</h5>
@@ -35,7 +27,7 @@
       </div>
       <div class="form-group">
         <label for="content">Content</label>
-        <textarea type="text" class="form-control" id="content" name="content" [(ngModel)]="comment.content" ></textarea>
+        <textarea class="form-control" id="content" name="content" [(ngModel)]="comment.content" ></textarea>
       </div>
       <button type="submit" class="btn btn-success">Submit</button>
     </form>

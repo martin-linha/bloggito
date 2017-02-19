@@ -20,7 +20,6 @@ export class PostDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getPost()
-
   }
 
   getPost() {

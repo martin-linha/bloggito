@@ -14,13 +14,12 @@ import javax.transaction.Transactional;
  * Created by martinlinha on 18.02.17.
  */
 @Service
-public class CommentServiceImpl implements CommentService{
+public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private CommentDao commentDao;
     @Autowired
     private PostDao postDao;
-
 
     @Override
     public Comment save(Comment comment) {
@@ -31,6 +30,7 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public Comment saveCommentToPost(Comment comment, Long id) {
         Post post = postDao.findOne(id);
+        comment.setPost(post);
         post.getComments().add(comment);
         return comment;
     }

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 import {Http} from '@angular/http';
 
@@ -13,6 +13,7 @@ import {Post} from "../posts/post";
 export class CommentsComponent implements OnInit {
 
   @Input() post: Post;
+  @Output() commentAdded: EventEmitter<any> = new EventEmitter();
   comment: Comment = new Comment();
 
   constructor(private http: Http) {
@@ -27,6 +28,7 @@ export class CommentsComponent implements OnInit {
       .toPromise()
       .then(resp => {
         console.log(resp.statusText);
+        this.commentAdded.emit();
       });
   }
 }
