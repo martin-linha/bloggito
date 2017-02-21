@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import {Post} from "./post";
+import {Post} from "../../model/post";
 
 
 @Component({

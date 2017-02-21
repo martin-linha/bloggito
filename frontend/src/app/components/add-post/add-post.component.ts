@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import {Post} from "../posts/post";
+import {Post} from "../../model/post";
+import { AuthHttp } from 'angular2-jwt';
 
 declare var jQuery:any;
 
@@ -17,7 +18,7 @@ export class AddPostComponent implements OnInit {
   posts: Post[];
   newPost: Post = new Post();
 
-  constructor(private http: Http) {
+  constructor(private http: Http, public authHttp: AuthHttp) {
   }
 
   ngOnInit() {

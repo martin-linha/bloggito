@@ -3,7 +3,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import {Post} from "../posts/post";
+import {Post} from "../../model/post";
 
 @Component({
   selector: 'app-comments',

@@ -1,4 +1,4 @@
-import {Post} from "../posts/post";
+import {Post} from "./post";
 export class Comment {
   author: string;
   email: string;

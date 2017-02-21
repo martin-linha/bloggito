@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * Created by martinlinha on 07.02.17.
  */
-//@Entity
-public class User extends AbstractEntity {
+@Entity
+public class UserDetail extends AbstractEntity {
 
     private String name;
     private String email;
@@ -18,6 +18,16 @@ public class User extends AbstractEntity {
     private String createdOn;
     @OneToMany(mappedBy = "creator")
     private List<Post> posts;
+    @OneToMany(mappedBy = "userDetail")
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public List<Post> getPosts() {
         return posts;

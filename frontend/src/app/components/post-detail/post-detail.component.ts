@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {Post} from "../posts/post";
+import {Post} from "../../model/post";
 import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';

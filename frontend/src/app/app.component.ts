@@ -4,7 +4,7 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import 'rxjs/add/operator/toPromise';
-import {Certification} from "./components/certifications/certification";
+import {Certification} from "./model/certification";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
   }
 
   getCertifications() {
-    console.log("xxxx");
     return this.http.get('http://localhost:8080/api/certifications')
       .toPromise()
       .then(resp => this.certifications = resp.json())

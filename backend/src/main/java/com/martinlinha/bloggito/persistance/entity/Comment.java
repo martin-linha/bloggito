@@ -19,6 +19,8 @@ public class Comment extends AbstractEntity {
     @ManyToOne
     @JsonBackReference
     private Post post;
+    @ManyToOne
+    private UserDetail userDetail;
 
     @PrePersist
     public void prePersist() {
@@ -63,5 +65,13 @@ public class Comment extends AbstractEntity {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public UserDetail getUserDetail() {
+        return userDetail;
+    }
+
+    public void setUserDetail(UserDetail userDetail) {
+        this.userDetail = userDetail;
     }
 }

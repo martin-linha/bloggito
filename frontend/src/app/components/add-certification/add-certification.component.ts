@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {Certification} from "../certifications/certification";
+import {Certification} from "../../model/certification";
 import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';

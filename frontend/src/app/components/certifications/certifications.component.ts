@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import {Certification} from "./certification";
+import {Certification} from "../../model/certification";
 
 @Component({
   selector: 'app-certifications',
