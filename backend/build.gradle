@@ -12,6 +12,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
 
 jar {
 	baseName = 'bloggito'
@@ -39,5 +40,3 @@ dependencies {
 springBoot {
 	mainClass = "com.martinlinha.bloggito.MainConfiguration"
 }
-
-task run(dependsOn: bootRun) {}

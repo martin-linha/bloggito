@@ -16,11 +16,12 @@ import {Http, RequestOptions} from '@angular/http';
 import {AuthHttp, AuthConfig} from 'angular2-jwt';
 import {LoginComponent} from './components/login/login.component';
 import {AuthGuardService} from "./services/auth-guard.service";
+import {AuthService} from "./services/auth.service";
 
 const appRoutes: Routes = [{path: '', component: PostsComponent},
   {path: 'posts/:id', component: PostDetailComponent},
   {path: 'add-post', component: AddPostComponent, canActivate: [AuthGuardService]},
-  {path: 'add-certification', component: AddCertificationComponent},
+  {path: 'add-certification', component: AddCertificationComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent}
 ];
 
@@ -51,7 +52,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
     },
-    AuthGuardService
+    AuthGuardService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
