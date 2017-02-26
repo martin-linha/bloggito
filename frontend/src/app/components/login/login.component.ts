@@ -16,6 +16,8 @@ import {AuthenticationResult} from "../../model/authentication-result";
 })
 export class LoginComponent implements OnInit {
   userDetail: UserDetail = new UserDetail();
+  submitted: boolean;
+  failedOn403: boolean;
 
   constructor(private router: Router, private http: Http, private authService: AuthService) {
   }
@@ -24,10 +26,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // this.authService.authenticate(this.userDetail).then(resp => {
-    //   resp.
-    //   AuthenticationResult result = <AuthenticationResult> resp;
-    //   console.log(result.result);
-    // })
+    this.authService.authenticate(this.userDetail).then(resp => {
+        this.submitted = true;
+        if (resp.result) {
+          let navigateTo = resp.urlRequested != null ? resp.urlRequested : '';
+          this.router.navigate([navigateTo]);
+        } else {
+          this.failedOn403 = true;
+        }
+      }
+    );
   }
 }

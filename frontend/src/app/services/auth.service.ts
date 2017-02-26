@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Response} from '@angular/http';
+
 
 import 'rxjs/add/operator/toPromise';
 import {UserDetail} from "../model/user-detail";
@@ -14,19 +15,19 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
+    console.log(localStorage.getItem("user"));
     return localStorage.getItem("user") != null;
   }
 
   authenticate(userDetail: UserDetail): PromiseLike<AuthenticationResult> {
     return this.http.post('http://localhost:8080/api/user', userDetail)
-      .toPromise()
-      .then(resp => {
-        if (resp.status = 200) {
+      .toPromise().then(resp => {
+        if (resp.status == 200) {
           localStorage.setItem("user", resp.json());
-          console.log(resp.json());
-          return new AuthenticationResult(true, this.urlRequested, userDetail, resp);
+          return new AuthenticationResult(true, this.urlRequested, resp);
         }
-        return null;
-      });
+      }).catch(error => {
+        return new AuthenticationResult(false, this.urlRequested, error);
+      })
   }
 }

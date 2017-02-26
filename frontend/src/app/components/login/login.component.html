@@ -1,17 +1,22 @@
+
 <section class="about section">
   <div class="section-inner">
     <div class="content">
 
-      <form (ngSubmit)="login()">
-        <div class="form-group">
-          <label for="email">Email</label>
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <div class="form-group" [class.has-error]="submitted && failedOn403">
+          <label class="control-label" for="email">Email</label>
           <input type="text" class="form-control" id="email" name="email" [(ngModel)]="userDetail.email" required>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="userDetail.password">
+        <div class="form-group" [class.has-error]="submitted && failedOn403">
+          <label class="control-label" for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="userDetail.password"
+                 required/>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <div class="alert alert-danger" [hidden]="!submitted && !failedOn401">
+          <strong>Authentication failed</strong> E-mail and password combination is incorrect.
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Submit</button>
       </form>
     </div>
   </div>

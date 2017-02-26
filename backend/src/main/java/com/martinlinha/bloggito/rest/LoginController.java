@@ -27,14 +27,17 @@ public class LoginController {
     public ResponseEntity<LoginResponse> login(@RequestBody UserDetail userDetail) {
         UserDetail fromDb = userService.findByEmail(userDetail.getEmail());
 
-        if (fromDb != null && BCrypt.checkpw(userDetail.getPassword(), fromDb.getPassword())) {
-            return new ResponseEntity<LoginResponse>(new LoginResponse(Jwts.builder()
+        if (fromDb != null
+                && userDetail.getPassword() != null
+                && userDetail.getEmail() != null
+                && BCrypt.checkpw(userDetail.getPassword(), fromDb.getPassword())) {
+            return new ResponseEntity<>(new LoginResponse(Jwts.builder()
                     .setSubject(userDetail.getEmail())
                     .signWith(SignatureAlgorithm.HS512, "secretkey")
                     .setIssuedAt(new Date())
                     .compact()), HttpStatus.OK);
         }
-        return new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     private static class LoginResponse {
