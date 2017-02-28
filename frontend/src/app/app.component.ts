@@ -18,13 +18,5 @@ export class AppComponent implements OnInit {
   constructor(private http:Http) {}
 
   ngOnInit(): void {
-    this.getCertifications();
-  }
-
-  getCertifications() {
-    return this.http.get('http://localhost:8080/api/certifications')
-      .toPromise()
-      .then(resp => this.certifications = resp.json())
-      .catch(err => console.log(err));
   }
 }

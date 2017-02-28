@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Certification} from "../../model/certification";
 import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import {CertificationsService} from "../../services/certifications.service";
 
 @Component({
   selector: 'app-add-certification',
@@ -14,7 +15,8 @@ export class AddCertificationComponent implements OnInit {
   certification: Certification = new Certification();
   @Output() certificationAdded: EventEmitter<any> = new EventEmitter();
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private certificationService: CertificationsService) {
+  }
 
   ngOnInit() {
   }
@@ -23,8 +25,7 @@ export class AddCertificationComponent implements OnInit {
     this.http.post('http://localhost:8080/api/certifications', this.certification)
       .toPromise()
       .then(resp => {
-        console.log(resp.statusText);
-        console.log("emitting...");
+        console.log('emitting');
         this.certificationAdded.emit();
       });
   }

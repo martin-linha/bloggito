@@ -1,6 +1,6 @@
 # GitHub Activity Stream Widget
 
-This is a small Javascript plugin that creates a stream of your recent GitHub activity. It displays the user's name, username, photo, and a list of each individual activity type. Click [here](https://caseyscarborough.github.io/github-activity) for a demo.
+This is a small Javascript plugin that creates a stream of your recent GitHub activity. It displays the userDetail's name, username, photo, and a list of each individual activity type. Click [here](https://caseyscarborough.github.io/github-activity) for a demo.
 
 A sample image of the activity stream is shown below:
 
