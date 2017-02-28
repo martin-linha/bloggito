@@ -13,7 +13,6 @@ import {CertificationsService} from "../../services/certifications.service";
 export class AddCertificationComponent implements OnInit {
 
   certification: Certification = new Certification();
-  @Output() certificationAdded: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: Http, private certificationService: CertificationsService) {
   }
@@ -25,8 +24,7 @@ export class AddCertificationComponent implements OnInit {
     this.http.post('http://localhost:8080/api/certifications', this.certification)
       .toPromise()
       .then(resp => {
-        console.log('emitting');
-        this.certificationAdded.emit();
+        this.certificationService.certificationEmmiter.emit();
       });
   }
 }

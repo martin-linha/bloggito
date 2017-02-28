@@ -12,17 +12,16 @@ import {CertificationsService} from "../../services/certifications.service";
 })
 export class CertificationsComponent implements OnInit {
 
-  @Input() certifications: Certification[];
+  certifications: Certification[];
 
   constructor(private http: Http, private certificationsService: CertificationsService) {
+    this.certificationsService.certificationEmmiter.subscribe(certificationAdded => {
+      this.getCertifications();
+    })
   }
 
   ngOnInit() {
     this.getCertifications();
-    this.certificationsService.certificationEmmiter.subscribe(certificationAdded => {
-      console.log('added')
-      this.getCertifications();
-    })
   }
 
   getCertifications() {
