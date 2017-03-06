@@ -3,9 +3,11 @@
     <h2 class="heading">Certifications</h2>
     <div class="content">
       <div class="item" *ngFor="let c of certifications">
-        <a [href]="c.link" target="_blank"><img [src]="c.img"/></a>
+        <a [href]="c.link !=null  && c.img != null" target="_blank"><img *ngIf="c.img != null" [src]="c.img"/></a>
+        <img *ngIf="c.link == null && c.img != null" [src]="c.img"/>
         <div class="description">
-          <a [href]="c.link" target="_blank"><span class="name">{{ c.title }}</span></a><br/><span
+          <a *ngIf="c.link != null" [href]="c.link" target="_blank"><span class="name">{{ c.title }}</span></a>
+          <span class="name" *ngIf="c.link == null">{{ c.title }}</span><br/><span
           class="license">{{ c.license }}</span>
         </div>
       </div>

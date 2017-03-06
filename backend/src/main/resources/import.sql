@@ -9,3 +9,5 @@ insert into certification VALUES (3, '../assets/images/certifications/oracle-log
 insert into certification VALUES (4, '../assets/images/certifications/oracle-logo.png', 'Oracle, 1z0-898', '../assets/images/certifications/OCEJEE6JPAD.pdf', 'Oracle Certified Expert, Java EE 6 Persistence API Developer');
 insert into certification VALUES (5, '../assets/images/certifications/oracle-logo.png', 'Oracle, 1z0-899', '../assets/images/certifications/OCEJEE6WCD.pdf', 'Oracle Certified Expert, Java EE 6 Web Component Developer');
 insert into certification VALUES (6, '../assets/images/certifications/avaloq-logo.png', 'Avaloq Evolution AG', null, 'Avaloq Certified Professional');
+
+-- posts

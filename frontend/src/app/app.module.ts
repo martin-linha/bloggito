@@ -18,6 +18,7 @@ import {LoginComponent} from './components/login/login.component';
 import {AuthGuardService} from "./services/auth-guard.service";
 import {AuthService} from "./services/auth.service";
 import {CertificationsService} from "./services/certifications.service";
+import { ContributionActivityComponent } from './components/contribution-activity/contribution-activity.component';
 
 const appRoutes: Routes = [{path: '', component: PostsComponent},
   {path: 'posts/:id', component: PostDetailComponent},
@@ -39,7 +40,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     Gravatar,
     AddCertificationComponent,
     CertificationsComponent,
-    LoginComponent
+    LoginComponent,
+    ContributionActivityComponent
   ],
   imports: [
     BrowserModule,
