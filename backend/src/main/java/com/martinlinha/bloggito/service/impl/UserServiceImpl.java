@@ -14,12 +14,11 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by martinlinha on 20.02.17.
  */
+@Transactional
 @Service
 public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> implements UserService {
 
@@ -28,6 +27,7 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
 
     @PostConstruct
     public void initializaFirstData() {
+        // First initialization of GithubData
         updateGithubData();
     }
 
@@ -41,28 +41,26 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
         return userDao.findByEmail(email);
     }
 
-    @Transactional
     @Scheduled(cron = "00 00 * * *")
     @Override
     public void updateGithubData() {
-        System.out.println("hey.");
-        System.out.println(userDao.count());
         userDao.findAll().forEach(user -> {
             RestTemplate template = new RestTemplate();
             GithubRepo[] repos = template.getForObject("https://api.github.com/users/martin-linha/repos", GithubRepo[].class);
-            user.getGithubAccount().setRepoCount(repos.length);
-            System.out.println("SETTING repo count " + repos.length);
-            long commitCount = Arrays.stream(repos)
+            user.getGithubAccount().setRepoCount(15);
+            user.getGithubAccount().setCommitCount(Arrays.stream(repos)
                     .map(GithubRepo::getName)
                     .mapToInt(repoName -> {
-                            System.out.println("https://api.github.com/repos/martin-linha/"
-                                    + repoName + "/stats/contributors");
-                            return new RestTemplate()
-                                    .getForObject("https://api.github.com/repos/martin-linha/"
-                                            + repoName + "/stats/contributors", GithubRepoDetail.class).getTotal();
+                        GithubRepoDetail[] contributions = new RestTemplate()
+                                .getForObject("https://api.github.com/repos/martin-linha/"
+                                        + repoName + "/stats/contributors", GithubRepoDetail[].class);
+                        return Arrays.stream(contributions)
+                                .filter(detail -> user.getGithubAccount().getGithubId().equals(detail.getAuthor().getId()))
+                                .mapToInt(GithubRepoDetail::getTotal)
+                                .sum();
                     })
-                    .sum();
-            System.out.println("@@@@@@@@@ " + commitCount);
+                    .sum());
+            userDao.save(user);
         });
     }
 }

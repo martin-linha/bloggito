@@ -9,6 +9,15 @@ import javax.persistence.Embeddable;
 public class GithubAccount {
     private Integer repoCount;
     private Integer commitCount;
+    private String githubId;
+
+    public String getGithubId() {
+        return githubId;
+    }
+
+    public void setGithubId(String githubId) {
+        this.githubId = githubId;
+    }
 
     public Integer getRepoCount() {
         return repoCount;
