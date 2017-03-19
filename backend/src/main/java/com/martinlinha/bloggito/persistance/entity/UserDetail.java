@@ -2,6 +2,7 @@ package com.martinlinha.bloggito.persistance.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -20,6 +21,8 @@ public class UserDetail extends AbstractEntity {
     private List<Post> posts;
     @OneToMany(mappedBy = "userDetail")
     private List<Comment> comments;
+    @Embedded
+    private GithubAccount githubAccount;
 
     public List<Comment> getComments() {
         return comments;
@@ -67,5 +70,16 @@ public class UserDetail extends AbstractEntity {
 
     public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public GithubAccount getGithubAccount() {
+        if (githubAccount == null) {
+            githubAccount = new GithubAccount();
+        }
+        return githubAccount;
+    }
+
+    public void setGithubAccount(GithubAccount githubAccount) {
+        this.githubAccount = githubAccount;
     }
 }

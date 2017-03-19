@@ -8,8 +8,12 @@
       </div><!--//item-->
       <div class="item">
         <h3 class="title"><i class="fa fa-stack-overflow"></i> Stackoverflow</h3>
-        <h4 class="contr-item">265 <span class="description">points</span></h4>
-        <h4 class="contr-item"><i class="silver fa fa-circle"></i> 1 <i class="bronze fa fa-circle"></i> 13</h4>
+        <h4 class="contr-item">{{ stackOverflowUser?.reputation }} <span class="description">points</span></h4>
+        <h4 class="contr-item">
+          <span *ngIf="stackOverflowUser?.badge_counts?.gold > 0"><i class="gold fa fa-circle"></i> {{ stackOverflowUser?.badge_counts?.gold }} </span>
+          <span *ngIf="stackOverflowUser?.badge_counts?.silver > 0"><i class="silver fa fa-circle"></i> {{ stackOverflowUser?.badge_counts?.silver }} </span>
+          <span *ngIf="stackOverflowUser?.badge_counts?.bronze > 0"><i class="bronze fa fa-circle"></i> {{ stackOverflowUser?.badge_counts?.bronze }} </span>
+        </h4>
       </div><!--//item-->
     </div><!--//content-->
   </div><!--//section-inner-->

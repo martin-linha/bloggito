@@ -8,4 +8,6 @@ import com.martinlinha.bloggito.persistance.entity.UserDetail;
 public interface UserService extends AbstractCrudService<UserDetail, Long> {
 
     UserDetail findByEmail(String email);
+
+    void updateGithubData();
 }
