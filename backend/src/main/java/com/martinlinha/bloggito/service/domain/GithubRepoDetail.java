@@ -26,7 +26,14 @@ public class GithubRepoDetail {
         this.author = author;
     }
 
-    public class Author {
+    public String getAuthorId() {
+        if (author != null) {
+            return author.getId();
+        }
+        return null;
+    }
+
+    static private class Author {
         private String id;
 
         public String getId() {

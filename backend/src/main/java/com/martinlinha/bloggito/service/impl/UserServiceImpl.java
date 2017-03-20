@@ -47,15 +47,16 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
         userDao.findAll().forEach(user -> {
             RestTemplate template = new RestTemplate();
             GithubRepo[] repos = template.getForObject("https://api.github.com/users/martin-linha/repos", GithubRepo[].class);
-            user.getGithubAccount().setRepoCount(15);
+            user.getGithubAccount().setRepoCount(repos.length);
             user.getGithubAccount().setCommitCount(Arrays.stream(repos)
                     .map(GithubRepo::getName)
                     .mapToInt(repoName -> {
                         GithubRepoDetail[] contributions = new RestTemplate()
                                 .getForObject("https://api.github.com/repos/martin-linha/"
                                         + repoName + "/stats/contributors", GithubRepoDetail[].class);
+                        System.out.println("it's ok");
                         return Arrays.stream(contributions)
-                                .filter(detail -> user.getGithubAccount().getGithubId().equals(detail.getAuthor().getId()))
+                                .filter(detail -> user.getGithubAccount().getGithubId().equals(detail.getAuthorId()))
                                 .mapToInt(GithubRepoDetail::getTotal)
                                 .sum();
                     })

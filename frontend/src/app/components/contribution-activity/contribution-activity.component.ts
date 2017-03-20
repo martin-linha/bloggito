@@ -12,14 +12,14 @@ import {GithubUser} from "./github-user";
 export class ContributionActivityComponent implements OnInit {
   stackOverflowUser: any;
   githubUser: GithubUser = new GithubUser();
+  email: string = 'martin.linha6@gmail.com';
 
   constructor(private http: Http) {
   }
 
   ngOnInit() {
     this.stackOverflowUser = this.getStackoverflowUser();
-    this.getGithubCommitCount();
-    this.getGithubRepoCount()
+    this.getGithubAccount();
   }
 
   getStackoverflowUser() {
@@ -31,26 +31,12 @@ export class ContributionActivityComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  getGithubRepoCount() {
-    return this.http.get('https://api.github.com/users/martin-linha/repos?type=all')
+  getGithubAccount() {
+    this.http.post('http://localhost:8080/api/user/github', this.email)
       .toPromise()
       .then(resp => {
-        let repos = resp.json();
-
-
-        this.githubUser.repoCount = resp.json().length;
-
-
-      })
-      .catch(err => console.log(err));
-  }
-
-  getGithubCommitCount() {
-    return this.http.get('https://api.stackexchange.com/2.2/users/4460867?order=desc&sort=reputation&site=stackoverflow')
-      .toPromise()
-      .then(resp => {
-        this.stackOverflowUser = resp.json().items[0];
-      })
-      .catch(err => console.log(err));
+        console.log(resp.statusText);
+        this.githubUser = resp.json();
+      });
   }
 }

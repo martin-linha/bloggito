@@ -506,6 +506,9 @@ iframe {
   font-weight: 600;
   padding-left: 25px;
 }
+.contribution .item .contr-item .badge {
+  margin-right: 10px;
+}
 .contribution .item .contr-item .gold {
   color: #FFE341;
 }

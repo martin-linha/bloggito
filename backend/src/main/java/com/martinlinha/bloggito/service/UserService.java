@@ -1,5 +1,6 @@
 package com.martinlinha.bloggito.service;
 
+import com.martinlinha.bloggito.persistance.entity.GithubAccount;
 import com.martinlinha.bloggito.persistance.entity.UserDetail;
 
 /**
