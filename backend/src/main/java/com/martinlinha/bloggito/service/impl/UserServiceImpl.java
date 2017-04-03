@@ -51,10 +51,11 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
             user.getGithubAccount().setCommitCount(Arrays.stream(repos)
                     .map(GithubRepo::getName)
                     .mapToInt(repoName -> {
+                        // TODO: implement exception handling. When requested for the first time, endpoint returns empty response.
+                        System.out.println("Deserializing https://api.github.com/repos/martin-linha/" + repoName + "/stats/contributors");
                         GithubRepoDetail[] contributions = new RestTemplate()
                                 .getForObject("https://api.github.com/repos/martin-linha/"
                                         + repoName + "/stats/contributors", GithubRepoDetail[].class);
-                        System.out.println("it's ok");
                         return Arrays.stream(contributions)
                                 .filter(detail -> user.getGithubAccount().getGithubId().equals(detail.getAuthorId()))
                                 .mapToInt(GithubRepoDetail::getTotal)

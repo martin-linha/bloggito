@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Http} from '@angular/http';
+import {Router} from '@angular/router';
 
 import 'rxjs/add/operator/toPromise';
 import {Post} from "../../model/post";
@@ -18,7 +19,7 @@ export class AddPostComponent implements OnInit {
   posts: Post[];
   newPost: Post = new Post();
 
-  constructor(private http: Http, public authHttp: AuthHttp) {
+  constructor(private http: Http, public authHttp: AuthHttp, private router: Router) {
   }
 
   ngOnInit() {
@@ -38,8 +39,7 @@ export class AddPostComponent implements OnInit {
     this.http.post('http://localhost:8080/api/posts', this.newPost)
       .toPromise()
       .then(resp => {
-        console.log(resp.statusText);
-        this.getPosts()
+        this.router.navigate(['/posts', resp.json().id]);
       });
   }
 }

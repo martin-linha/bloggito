@@ -14,6 +14,7 @@ import java.util.List;
 @Entity
 public class Post extends AbstractEntity {
     private String title;
+    @Column(length = 100000)
     private String content;
     private String perex;
     private Date postedOn;

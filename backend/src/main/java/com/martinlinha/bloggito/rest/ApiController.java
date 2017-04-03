@@ -24,9 +24,8 @@ public class ApiController {
     }
 
     @PostMapping(value = "/posts")
-    @ResponseStatus(HttpStatus.OK)
-    public void addPost(@RequestBody Post post) {
-        postService.save(post);
+    public Post addPost(@RequestBody Post post) {
+        return postService.save(post);
     }
 
     @GetMapping(value = "/posts/{id}")
