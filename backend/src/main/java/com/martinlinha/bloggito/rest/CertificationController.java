@@ -2,6 +2,7 @@ package com.martinlinha.bloggito.rest;
 
 import com.martinlinha.bloggito.persistance.entity.Certification;
 import com.martinlinha.bloggito.service.CertificationService;
+import com.martinlinha.bloggito.service.auth.annotation.JwtSecured;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,8 @@ public class CertificationController {
 
     @PostMapping("/certifications")
     @ResponseStatus(HttpStatus.OK)
-    public void addPost(@RequestBody Certification certification, @RequestHeader("Authentication") String token) {
+    @JwtSecured
+    public void addCertification(@RequestBody Certification certification) {
         certificationService.save(certification);
     }
 

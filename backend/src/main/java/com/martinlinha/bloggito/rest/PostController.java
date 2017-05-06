@@ -25,6 +25,7 @@ public class PostController {
     }
 
     @PostMapping(value = "/posts")
+    @JwtSecured
     public Post addPost(@RequestBody Post post) {
         return postService.save(post);
     }

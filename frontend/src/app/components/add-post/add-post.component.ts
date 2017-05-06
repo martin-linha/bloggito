@@ -19,7 +19,7 @@ export class AddPostComponent implements OnInit {
   posts: Post[];
   newPost: Post = new Post();
 
-  constructor(private http: Http, public authHttp: AuthHttp, private router: Router) {
+  constructor(private http: Http, private authHttp: AuthHttp, private router: Router) {
   }
 
   ngOnInit() {
@@ -36,9 +36,6 @@ export class AddPostComponent implements OnInit {
 
   savePost() {
     this.newPost.content = jQuery('#summernote').summernote('code');
-    console.log(localStorage.getItem("token"));
-    localStorage.setItem('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ');
-
     this.authHttp.post('http://localhost:8080/api/posts', this.newPost)
       .toPromise()
       .then(resp => {

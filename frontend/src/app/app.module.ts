@@ -20,7 +20,6 @@ import {AuthService} from "./services/auth.service";
 import {CertificationsService} from "./services/certifications.service";
 import {ContributionActivityComponent} from './components/contribution-activity/contribution-activity.component';
 import {JwtHelper} from "angular2-jwt/angular2-jwt";
-import {AuthModule} from "./auth.module";
 
 const appRoutes: Routes = [{path: '', component: PostsComponent},
   {path: 'posts/:id', component: PostDetailComponent},
@@ -55,7 +54,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     FormsModule,
     HttpModule,
-    AuthModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

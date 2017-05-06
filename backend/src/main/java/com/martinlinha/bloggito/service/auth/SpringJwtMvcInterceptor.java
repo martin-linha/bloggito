@@ -20,14 +20,14 @@ public class SpringJwtMvcInterceptor extends HandlerInterceptorAdapter {
         if (handler instanceof HandlerMethod) {
             HandlerMethod method = (HandlerMethod) handler;
             if (method.hasMethodAnnotation(JwtSecured.class)) {
-                String authenticationHeader = request.getHeader("Authorization");
-                if (authenticationHeader == null || !authenticationHeader.startsWith(AUTHENTICATION_BEARER)) {
+                String authorizationHeader = request.getHeader("Authorization");
+                if (authorizationHeader == null || !authorizationHeader.startsWith(AUTHENTICATION_BEARER)) {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                     return false;
                 } else {
                     try {
-                        String authenticationHeaderBearerless = authenticationHeader.
-                                substring(AUTHENTICATION_BEARER.length(), authenticationHeader.length());
+                        String authenticationHeaderBearerless = authorizationHeader.
+                                substring(AUTHENTICATION_BEARER.length(), authorizationHeader.length());
                         Jwts.parser()
                                 .setSigningKey("secretkey")
                                 .parseClaimsJws(authenticationHeaderBearerless).getBody();

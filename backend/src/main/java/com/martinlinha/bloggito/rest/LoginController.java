@@ -47,7 +47,7 @@ public class LoginController {
                     .setSubject(userDetail.getEmail())
                     .signWith(SignatureAlgorithm.HS512, "secretkey")
                     .setIssuedAt(new Date())
-                    .setExpiration(Date.from(LocalDateTime.now().plusMinutes(15).toInstant(ZoneOffset.UTC)))
+                    .setExpiration(Date.from(LocalDateTime.now().plusMinutes(1).toInstant(ZoneOffset.UTC)))
                     .compact();
             return new ResponseEntity<>(new LoginResponse(jwtToken), HttpStatus.OK);
         }
