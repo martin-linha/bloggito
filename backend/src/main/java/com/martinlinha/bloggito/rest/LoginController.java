@@ -41,13 +41,13 @@ public class LoginController {
                 && userDetail.getEmail() != null
                 && BCrypt.checkpw(userDetail.getPassword(), fromDb.getPassword())) {
 
-            Date createdDate = new Date();
+            LocalDateTime createdDate = LocalDateTime.now();
 
             String jwtToken = Jwts.builder()
                     .setSubject(userDetail.getEmail())
                     .signWith(SignatureAlgorithm.HS512, "secretkey")
-                    .setIssuedAt(new Date())
-                    .setExpiration(Date.from(LocalDateTime.now().plusMinutes(1).toInstant(ZoneOffset.UTC)))
+                    .setIssuedAt(Date.from(createdDate.toInstant(ZoneOffset.UTC)))
+                    .setExpiration(Date.from(createdDate.plusMinutes(1).toInstant(ZoneOffset.UTC)))
                     .compact();
             return new ResponseEntity<>(new LoginResponse(jwtToken), HttpStatus.OK);
         }
