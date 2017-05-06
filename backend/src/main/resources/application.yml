@@ -13,3 +13,9 @@ spring:
       ddl-auto: create-drop
 server:
   contextPath: /api
+bloggito:
+  session-ttl: 60
+  github:
+    update-interval: 0 1,13 * * *
+  jwt:
+    secretkey: secretkey

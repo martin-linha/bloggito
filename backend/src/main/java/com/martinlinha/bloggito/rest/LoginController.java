@@ -7,6 +7,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,11 @@ import java.util.Date;
  */
 @RestController
 public class LoginController {
+
+    @Value("${bloggito.session-ttl}")
+    private Long sessionTtl;
+    @Value("${bloggito.jwt.secretkey}")
+    private String secretkey;
 
     @Autowired
     private UserService userService;
@@ -42,9 +48,9 @@ public class LoginController {
 
             String jwtToken = Jwts.builder()
                     .setSubject(userDetail.getEmail())
-                    .signWith(SignatureAlgorithm.HS512, "secretkey")
+                    .signWith(SignatureAlgorithm.HS512, secretkey)
                     .setIssuedAt(Date.from(createdDate.toInstant()))
-                    .setExpiration(Date.from(createdDate.plusMinutes(60).toInstant()))
+                    .setExpiration(Date.from(createdDate.plusMinutes(sessionTtl).toInstant()))
                     .compact();
             return new ResponseEntity<>(new LoginResponse(jwtToken), HttpStatus.OK);
         }

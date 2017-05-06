@@ -14,13 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 public class SpringJwtMvcInterceptor extends HandlerInterceptorAdapter {
 
     private static final String AUTHENTICATION_BEARER = "Bearer ";
+    private static final String AUTHENTICATION_HEADER = "Authorization";
+
+    private String secretkey;
+
+    public SpringJwtMvcInterceptor(String secretkey) {
+        this.secretkey = secretkey;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
             HandlerMethod method = (HandlerMethod) handler;
             if (method.hasMethodAnnotation(JwtSecured.class)) {
-                String authorizationHeader = request.getHeader("Authorization");
+                String authorizationHeader = request.getHeader(AUTHENTICATION_HEADER);
                 if (authorizationHeader == null || !authorizationHeader.startsWith(AUTHENTICATION_BEARER)) {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                     return false;
@@ -29,7 +36,7 @@ public class SpringJwtMvcInterceptor extends HandlerInterceptorAdapter {
                         String authenticationHeaderBearerless = authorizationHeader.
                                 substring(AUTHENTICATION_BEARER.length(), authorizationHeader.length());
                         Jwts.parser()
-                                .setSigningKey("secretkey")
+                                .setSigningKey(secretkey)
                                 .parseClaimsJws(authenticationHeaderBearerless).getBody();
                     } catch (MalformedJwtException | SignatureException | ExpiredJwtException e) {
                         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);

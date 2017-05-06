@@ -34,6 +34,8 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
     @Autowired
     private UserDao userDao;
 
+    private String aaa;
+
     @PostConstruct
     public void initializaFirstData() {
         // First initialization of GithubData
@@ -50,7 +52,7 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
         return userDao.findByEmail(email);
     }
 
-    @Scheduled(cron = "0 1,13 * * *")
+    @Scheduled(cron = "${bloggito.github.update-interval}")
     @Override
     public void updateGithubData() {
         int attempts = 20;
@@ -75,7 +77,7 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
 
                             ResponseEntity<GithubRepoDetail[]> contributions = new RestTemplate()
                                     .exchange("https://api.github.com/repos/martin-linha/"
-                                            + repoName + "/stats/contributors", HttpMethod.GET, new HttpEntity<GithubRepoDetail[]>(HttpUtils.createHeaders("martin-linha", "Popelka11")), GithubRepoDetail[].class);
+                                            + repoName + "/stats/contributors", HttpMethod.GET, new HttpEntity<GithubRepoDetail[]>(HttpUtils.createHeaders("martin-linha", "")), GithubRepoDetail[].class);
 
                             return Arrays.stream(contributions.getBody())
                                     .filter(detail -> user.getGithubAccount().getGithubId().equals(detail.getAuthorId()))
