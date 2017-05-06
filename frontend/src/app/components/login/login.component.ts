@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(this.userDetail).then(resp => {
         this.submitted = true;
         if (resp.result) {
-          let navigateTo = resp.urlRequested != null ? resp.urlRequested : '';
+          let navigateTo = resp.urlRequested ? resp.urlRequested : '';
           this.router.navigate([navigateTo]);
         } else {
           this.failedOn403 = true;

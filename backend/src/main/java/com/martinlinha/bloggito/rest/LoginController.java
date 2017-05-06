@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.Date;
@@ -41,13 +38,13 @@ public class LoginController {
                 && userDetail.getEmail() != null
                 && BCrypt.checkpw(userDetail.getPassword(), fromDb.getPassword())) {
 
-            LocalDateTime createdDate = LocalDateTime.now();
+            ZonedDateTime createdDate = ZonedDateTime.now();
 
             String jwtToken = Jwts.builder()
                     .setSubject(userDetail.getEmail())
                     .signWith(SignatureAlgorithm.HS512, "secretkey")
-                    .setIssuedAt(Date.from(createdDate.toInstant(ZoneOffset.UTC)))
-                    .setExpiration(Date.from(createdDate.plusMinutes(1).toInstant(ZoneOffset.UTC)))
+                    .setIssuedAt(Date.from(createdDate.toInstant()))
+                    .setExpiration(Date.from(createdDate.plusMinutes(60).toInstant()))
                     .compact();
             return new ResponseEntity<>(new LoginResponse(jwtToken), HttpStatus.OK);
         }
