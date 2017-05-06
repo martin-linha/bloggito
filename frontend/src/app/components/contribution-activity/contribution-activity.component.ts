@@ -35,7 +35,6 @@ export class ContributionActivityComponent implements OnInit {
     this.http.post('http://localhost:8080/api/user/github', this.email)
       .toPromise()
       .then(resp => {
-        console.log(resp.statusText);
         this.githubUser = resp.json();
       });
   }
