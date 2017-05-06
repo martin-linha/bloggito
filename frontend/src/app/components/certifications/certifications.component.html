@@ -3,15 +3,15 @@
     <h2 class="heading">Certifications</h2>
     <div class="content">
       <div class="item" *ngFor="let c of certifications">
-        <a [href]="c.link !=null  && c.img != null" target="_blank"><img *ngIf="c.img != null" [src]="c.img"/></a>
-        <img *ngIf="c.link == null && c.img != null" [src]="c.img"/>
+        <a *ngIf="c.link && c.img" [href]="c.link" target="_blank"><img *ngIf="c.img != null" [src]="c.img"/></a>
+        <img *ngIf="!c.link && c.img" [src]="c.img"/>
         <div class="description">
-          <a *ngIf="c.link != null" [href]="c.link" target="_blank"><span class="name">{{ c.title }}</span></a>
-          <span class="name" *ngIf="c.link == null">{{ c.title }}</span><br/><span
+          <a *ngIf="c.link" [href]="c.link" target="_blank"><span class="name">{{ c.title }}</span></a>
+          <span class="name" *ngIf="!c.link">{{ c.title }}</span><br/><span
           class="license">{{ c.license }}</span>
         </div>
       </div>
-      <p><a class="more-link" href="https://www.linkedin.com/in/martinlinha"><i class="fa fa-external-link"></i> More on
+      <p><a class="more-link" target="_blank" href="https://www.linkedin.com/in/martinlinha"><i class="fa fa-external-link"></i> More on
         Linkedin</a></p>
     </div>
   </div>
