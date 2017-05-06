@@ -1,5 +1,6 @@
 package com.martinlinha.bloggito.persistance.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -10,6 +11,26 @@ public class GithubAccount {
     private Integer repoCount;
     private Integer commitCount;
     private String githubId;
+    @Column(name = "github_username")
+    private String username;
+    @Column(name = "github_password")
+    private String password;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getGithubId() {
         return githubId;

@@ -18,7 +18,9 @@ import {LoginComponent} from './components/login/login.component';
 import {AuthGuardService} from "./services/auth-guard.service";
 import {AuthService} from "./services/auth.service";
 import {CertificationsService} from "./services/certifications.service";
-import { ContributionActivityComponent } from './components/contribution-activity/contribution-activity.component';
+import {ContributionActivityComponent} from './components/contribution-activity/contribution-activity.component';
+import {JwtHelper} from "angular2-jwt/angular2-jwt";
+import {AuthModule} from "./auth.module";
 
 const appRoutes: Routes = [{path: '', component: PostsComponent},
   {path: 'posts/:id', component: PostDetailComponent},
@@ -28,8 +30,14 @@ const appRoutes: Routes = [{path: '', component: PostsComponent},
 ];
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig(), http, options);
+  return new AuthHttp(new AuthConfig({
+    tokenName: 'token',
+    tokenGetter: (() => localStorage.getItem('token')),
+    globalHeaders: [{'Content-Type':'application/json'}],
+  }), http, options);
 }
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +55,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     FormsModule,
     HttpModule,
+    AuthModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
@@ -57,9 +66,15 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     },
     AuthGuardService,
     AuthService,
-    CertificationsService
-  ],
+    CertificationsService,
+    JwtHelper,
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

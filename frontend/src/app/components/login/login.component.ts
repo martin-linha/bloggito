@@ -2,12 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {UserDetail} from "../../model/user-detail";
 import {Http} from '@angular/http';
 import {Router} from '@angular/router';
-
+import { AuthHttp } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
-import {AuthGuardService} from "../../services/auth-guard.service";
 import {AuthService} from "../../services/auth.service";
-import {AuthenticationResult} from "../../model/authentication-result";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +17,8 @@ export class LoginComponent implements OnInit {
   submitted: boolean;
   failedOn403: boolean;
 
-  constructor(private router: Router, private http: Http, private authService: AuthService) {
+  constructor(private router: Router, private http: Http,
+              private authService: AuthService, private authHttp: AuthHttp) {
   }
 
   ngOnInit() {

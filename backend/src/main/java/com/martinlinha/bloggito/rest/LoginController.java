@@ -2,6 +2,7 @@ package com.martinlinha.bloggito.rest;
 
 import com.martinlinha.bloggito.persistance.entity.UserDetail;
 import com.martinlinha.bloggito.service.UserService;
+import com.martinlinha.bloggito.service.auth.annotation.JwtSecured;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.mindrot.jbcrypt.BCrypt;
@@ -10,6 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Date;
 
 /**
@@ -29,18 +36,29 @@ public class LoginController {
     @PostMapping("/user")
     public ResponseEntity<LoginResponse> login(@RequestBody UserDetail userDetail) {
         UserDetail fromDb = userService.findByEmail(userDetail.getEmail());
-
         if (fromDb != null
                 && userDetail.getPassword() != null
                 && userDetail.getEmail() != null
                 && BCrypt.checkpw(userDetail.getPassword(), fromDb.getPassword())) {
-            return new ResponseEntity<>(new LoginResponse(Jwts.builder()
+
+            Date createdDate = new Date();
+
+            String jwtToken = Jwts.builder()
                     .setSubject(userDetail.getEmail())
                     .signWith(SignatureAlgorithm.HS512, "secretkey")
                     .setIssuedAt(new Date())
-                    .compact()), HttpStatus.OK);
+                    .setExpiration(Date.from(LocalDateTime.now().plusMinutes(15).toInstant(ZoneOffset.UTC)))
+                    .compact();
+            return new ResponseEntity<>(new LoginResponse(jwtToken), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    @JwtSecured
+    @GetMapping("/user/logged")
+    public HttpStatus isUserAuthenticated() {
+        // If user is not logged in, method returns 401
+        return HttpStatus.OK;
     }
 
     private static class LoginResponse {

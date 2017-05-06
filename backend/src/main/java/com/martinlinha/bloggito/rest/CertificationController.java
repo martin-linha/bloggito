@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * Created by martinlinha on 19.02.17.
  */
@@ -19,7 +17,7 @@ public class CertificationController {
 
     @PostMapping("/certifications")
     @ResponseStatus(HttpStatus.OK)
-    public void addPost(@RequestBody Certification certification) {
+    public void addPost(@RequestBody Certification certification, @RequestHeader("Authentication") String token) {
         certificationService.save(certification);
     }
 

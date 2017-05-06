@@ -36,7 +36,10 @@ export class AddPostComponent implements OnInit {
 
   savePost() {
     this.newPost.content = jQuery('#summernote').summernote('code');
-    this.http.post('http://localhost:8080/api/posts', this.newPost)
+    console.log(localStorage.getItem("token"));
+    localStorage.setItem('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ');
+
+    this.authHttp.post('http://localhost:8080/api/posts', this.newPost)
       .toPromise()
       .then(resp => {
         this.router.navigate(['/posts', resp.json().id]);
