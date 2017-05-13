@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Http} from '@angular/http';
+
+import {Post} from "../../model/post";
 
 @Component({
   selector: 'app-admin',
@@ -6,13 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  posts: Post[];
 
-  private storage: string = localStorage.getItem('token');
-
-  constructor() { }
+  constructor(private http: Http) { }
 
   ngOnInit() {
+    this.getPosts()
 
   }
 
+  getPosts() {
+    return this.http.get('http://localhost:8080/api/posts')
+      .toPromise()
+      .then(resp => this.posts = resp.json())
+      .catch(err => console.log(err));
+  }
 }
