@@ -18,7 +18,7 @@ export class PostDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private http: Http,
-              private authService: AuthService) {
+              public authService: AuthService) {
   }
 
   ngOnInit() {
