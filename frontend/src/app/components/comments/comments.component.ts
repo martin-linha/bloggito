@@ -4,6 +4,7 @@ import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import {Post} from "../../model/post";
+import {Comment} from "../../model/comment";
 
 @Component({
   selector: 'app-comments',
@@ -20,6 +21,7 @@ export class CommentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.post);
   }
 
   save() {

@@ -24,7 +24,7 @@ public class Post extends AbstractEntity {
     private Date postedOn;
     @ManyToOne
     private Post creator;
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     @JsonManagedReference
     @OrderBy("createdOn desc")
     private List<Comment> comments;

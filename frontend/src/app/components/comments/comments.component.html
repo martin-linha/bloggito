@@ -1,5 +1,5 @@
 <h4>Comments</h4>
-<div class="comments">
+<div class="comments" *ngIf="post && post.comments">
   <div class="comment" *ngFor="let c of post.comments">
     <img gravatar [email]="c.email" [size]="60">
     <div class="description">
