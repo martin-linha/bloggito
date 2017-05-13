@@ -1,6 +1,9 @@
 package com.martinlinha.bloggito.persistance.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.Type;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -14,7 +17,8 @@ import java.util.List;
 @Entity
 public class Post extends AbstractEntity {
     private String title;
-    @Column(length = 100000)
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private String content;
     private String perex;
     private Date postedOn;

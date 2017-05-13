@@ -19,11 +19,13 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @Transactional
     @GetMapping(value = "/posts")
     public Iterable<Post> getPosts() {
         return postService.getPostsDateDesc();
     }
 
+    @Transactional
     @PostMapping(value = "/posts")
     @JwtSecured
     public Post addPost(@RequestBody Post post) {
