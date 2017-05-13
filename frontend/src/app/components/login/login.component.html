@@ -13,7 +13,7 @@
           <input type="password" class="form-control" id="password" name="password" [(ngModel)]="userDetail.password"
                  required/>
         </div>
-        <div class="alert alert-danger" [hidden]="!submitted && !failedOn401">
+        <div class="alert alert-danger" [hidden]="!submitted && !failedOn403">
           <strong>Authentication failed</strong> E-mail and password combination is incorrect.
         </div>
         <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Submit</button>
