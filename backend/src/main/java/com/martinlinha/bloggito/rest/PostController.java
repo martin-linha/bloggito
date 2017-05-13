@@ -36,4 +36,15 @@ public class PostController {
     public Post getPostById(@PathVariable Long id) {
         return postService.findById(id);
     }
+
+    @Transactional
+    @PostMapping(value = "/posts/{id}/edit")
+    @JwtSecured
+    public Post editPostById(@PathVariable Long id, @RequestBody Post post) {
+        Post persistedPost = postService.findById(id);
+        persistedPost.setContent(post.getContent());
+        persistedPost.setPerex(post.getPerex());
+        persistedPost.setTitle(post.getTitle());
+        return persistedPost;
+    }
 }

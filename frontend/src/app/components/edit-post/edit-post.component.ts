@@ -4,9 +4,9 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 import 'rxjs/add/operator/toPromise';
 import {Post} from "../../model/post";
-import { AuthHttp } from 'angular2-jwt';
+import {AuthHttp} from 'angular2-jwt';
 
-declare var jQuery:any;
+declare var jQuery: any;
 
 
 @Component({
@@ -16,7 +16,6 @@ declare var jQuery:any;
 })
 export class EditPostComponent implements OnInit {
 
-  posts: Post[];
   editPost: Post = new Post();
 
   constructor(private http: Http, private authHttp: AuthHttp, private router: Router, private route: ActivatedRoute) {
@@ -39,7 +38,7 @@ export class EditPostComponent implements OnInit {
 
   savePost() {
     this.editPost.content = jQuery('#summernote').summernote('code');
-    this.authHttp.post('http://localhost:8080/api/posts', this.editPost)
+    this.authHttp.post('http://localhost:8080/api/posts/' + this.editPost.id + '/edit', this.editPost)
       .toPromise()
       .then(resp => {
         this.router.navigate(['/posts', resp.json().id]);
