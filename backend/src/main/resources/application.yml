@@ -17,5 +17,7 @@ bloggito:
   session-ttl: 60
   github:
     update-interval: 0 1,13 * * *
+  stackoverflow:
+    update-interval: 0 1,13 * * *
   jwt:
     secretkey: secretkey

@@ -6,6 +6,7 @@ import com.martinlinha.bloggito.persistance.entity.UserDetail;
 import com.martinlinha.bloggito.service.UserService;
 import com.martinlinha.bloggito.service.domain.GithubRepo;
 import com.martinlinha.bloggito.service.domain.GithubRepoDetail;
+import com.martinlinha.bloggito.service.domain.StackOverflowDetail;
 import com.martinlinha.bloggito.util.HttpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,8 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
     public void initializaFirstData() {
         // First initialization of GithubData
         updateGithubData();
+        // First initialization of StackOverflowData
+        updateStackoverflowData();
     }
 
     @Override
@@ -60,6 +64,34 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
             if (updateGithub()) {
                 break;
             }
+        }
+    }
+
+    @Scheduled(cron = "${bloggito.stackoverflow.update-interval}")
+    @Override
+    public void updateStackoverflowData() {
+        try {
+            userDao.findAll().forEach(user -> {
+                if (user.getStackOverflowAccount().getStackOverflowId() != null) {
+                    RestTemplate template = new RestTemplate();
+                    // We need this factory to get gzip encoding supported
+                    template.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+                    StackOverflowDetail stackOverflowDetail = template.getForObject("https://api.stackexchange.com/2.2/users/"
+                                    + user.getStackOverflowAccount().getStackOverflowId()
+                                    + "?order=desc&sort=reputation&site=stackoverflow"
+                            , StackOverflowDetail.class);
+                    if (stackOverflowDetail.getItems().length > 0) {
+                        StackOverflowDetail.Item item = stackOverflowDetail.getItems()[0];
+                        user.getStackOverflowAccount().setBronze(item.getBadgeCounts().getBronze());
+                        user.getStackOverflowAccount().setGold(item.getBadgeCounts().getGold());
+                        user.getStackOverflowAccount().setSilver(item.getBadgeCounts().getSilver());
+                        user.getStackOverflowAccount().setPoints(item.getReputation());
+                    }
+                    userDao.save(user);
+                }
+            });
+        } catch (HttpMessageNotReadableException hmnre) {
+            hmnre.printStackTrace();
         }
     }
 

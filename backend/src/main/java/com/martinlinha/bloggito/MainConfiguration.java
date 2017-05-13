@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * Created by martinlinha on 22.01.17.
  */
 @SpringBootApplication
-@EnableAspectJAutoProxy
 public class MainConfiguration {
 
     public static void main(String[] args) {

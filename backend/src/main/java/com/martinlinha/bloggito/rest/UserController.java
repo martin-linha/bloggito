@@ -21,7 +21,7 @@ import java.util.Date;
  * Created by martinlinha on 20.02.17.
  */
 @RestController
-public class LoginController {
+public class UserController {
 
     @Value("${bloggito.session-ttl}")
     private Long sessionTtl;
@@ -31,8 +31,8 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user/github")
-    public UserDetail findUserByEmail(@RequestBody String email) {
+    @GetMapping("/user/{email:.+}")
+    public UserDetail findUserByEmail(@PathVariable String email) {
         return userService.findByEmail(email);
     }
 

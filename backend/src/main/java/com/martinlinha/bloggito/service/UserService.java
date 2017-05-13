@@ -11,4 +11,6 @@ public interface UserService extends AbstractCrudService<UserDetail, Long> {
     UserDetail findByEmail(String email);
 
     void updateGithubData();
+
+    void updateStackoverflowData();
 }

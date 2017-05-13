@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import {GithubUser} from "./github-user";
+import {UserDetail} from "../../model/user-detail";
 
 @Component({
   selector: 'app-contribution-activity',
@@ -10,32 +10,24 @@ import {GithubUser} from "./github-user";
   styleUrls: ['./contribution-activity.component.css']
 })
 export class ContributionActivityComponent implements OnInit {
-  stackOverflowUser: any;
-  githubUser: GithubUser = new GithubUser();
+  user: UserDetail = new UserDetail();
   email: string = 'martin.linha6@gmail.com';
 
   constructor(private http: Http) {
   }
 
   ngOnInit() {
-    this.stackOverflowUser = this.getStackoverflowUser();
-    this.getGithubAccount();
+    this.getUserDetail();
   }
 
-  getStackoverflowUser() {
-    return this.http.get('https://api.stackexchange.com/2.2/users/4460867?order=desc&sort=reputation&site=stackoverflow')
+  getUserDetail() {
+    this.http.get('http://localhost:8080/api/user/' + encodeURI(this.email))
       .toPromise()
       .then(resp => {
-        this.stackOverflowUser = resp.json().items[0];
-      })
-      .catch(err => console.log(err));
-  }
-
-  getGithubAccount() {
-    this.http.post('http://localhost:8080/api/user/github', this.email)
-      .toPromise()
-      .then(resp => {
-        this.githubUser = resp.json();
+        console.log('xxx');
+        console.log(resp.json());
+        console.log('xxxx');
+        this.user = resp.json();
       });
   }
 }

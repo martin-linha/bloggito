@@ -1,5 +1,5 @@
 -- users
-insert into user_detail (id, email, password, github_id)  values (1, 'martin.linha6@gmail.com', '$2a$06$skf/eryVDPnYC2g/vHL0ke36r.JnoRnWAMUx9xex6n0uZYQFOikKq', '8123842');
+insert into user_detail (id, email, password, github_id, stack_overflow_id)  values (1, 'martin.linha6@gmail.com', '$2a$06$skf/eryVDPnYC2g/vHL0ke36r.JnoRnWAMUx9xex6n0uZYQFOikKq', '8123842', '4460867');
 
 -- certifications
 

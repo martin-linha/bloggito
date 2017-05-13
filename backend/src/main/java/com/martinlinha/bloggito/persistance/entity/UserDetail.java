@@ -1,7 +1,5 @@
 package com.martinlinha.bloggito.persistance.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -23,6 +21,8 @@ public class UserDetail extends AbstractEntity {
     private List<Comment> comments;
     @Embedded
     private GithubAccount githubAccount;
+    @Embedded
+    private StackOverflowAccount stackOverflowAccount;
 
     public List<Comment> getComments() {
         return comments;
@@ -81,5 +81,16 @@ public class UserDetail extends AbstractEntity {
 
     public void setGithubAccount(GithubAccount githubAccount) {
         this.githubAccount = githubAccount;
+    }
+
+    public StackOverflowAccount getStackOverflowAccount() {
+        if (stackOverflowAccount == null) {
+            stackOverflowAccount = new StackOverflowAccount();
+        }
+        return stackOverflowAccount;
+    }
+
+    public void setStackOverflowAccount(StackOverflowAccount stackOverflowAccount) {
+        this.stackOverflowAccount = stackOverflowAccount;
     }
 }
