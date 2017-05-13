@@ -13,7 +13,7 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./post-detail.component.css']
 })
 export class PostDetailComponent implements OnInit {
-  private post: Post = new Post();
+  post: Post = new Post();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
