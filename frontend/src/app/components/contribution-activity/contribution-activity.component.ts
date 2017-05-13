@@ -24,9 +24,6 @@ export class ContributionActivityComponent implements OnInit {
     this.http.get('http://localhost:8080/api/user/' + encodeURI(this.email))
       .toPromise()
       .then(resp => {
-        console.log('xxx');
-        console.log(resp.json());
-        console.log('xxxx');
         this.user = resp.json();
       });
   }
