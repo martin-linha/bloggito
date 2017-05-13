@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
-import {Gravatar} from 'ng2-gravatar-directive';
+import {Gravatar} from 'ng2-gravatar-directive/src/gravatar';
 
 import {AppComponent} from './app.component';
 import {PostsComponent} from './components/posts/posts.component';
@@ -20,7 +20,7 @@ import {AuthService} from "./services/auth.service";
 import {CertificationsService} from "./services/certifications.service";
 import {ContributionActivityComponent} from './components/contribution-activity/contribution-activity.component';
 import {JwtHelper} from "angular2-jwt/angular2-jwt";
-import { AdminComponent } from './components/admin/admin.component';
+import {AdminComponent} from './components/admin/admin.component';
 import {EditPostComponent} from "./components/edit-post/edit-post.component";
 
 const appRoutes: Routes = [{path: '', component: PostsComponent},
@@ -36,7 +36,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
     tokenName: 'token',
     tokenGetter: (() => localStorage.getItem('token')),
-    globalHeaders: [{'Content-Type':'application/json'}],
+    globalHeaders: [{'Content-Type': 'application/json'}],
   }), http, options);
 }
 
