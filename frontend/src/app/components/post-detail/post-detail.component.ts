@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Post} from "../../model/post";
 import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import {AuthService} from "../../services/auth.service";
 
 
 @Component({
@@ -16,7 +17,9 @@ export class PostDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private http: Http) { }
+              private http: Http,
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.getPost()
@@ -25,8 +28,10 @@ export class PostDetailComponent implements OnInit {
   getPost() {
     return this.http.get('http://localhost:8080/api/posts/' + +this.route.snapshot.params['id'])
       .toPromise()
-      .then(resp => {console.info(resp);
-      this.post = resp.json()})
+      .then(resp => {
+        console.info(resp);
+        this.post = resp.json()
+      })
       .catch(err => console.log(err));
   }
 }

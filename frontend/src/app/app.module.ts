@@ -21,13 +21,15 @@ import {CertificationsService} from "./services/certifications.service";
 import {ContributionActivityComponent} from './components/contribution-activity/contribution-activity.component';
 import {JwtHelper} from "angular2-jwt/angular2-jwt";
 import { AdminComponent } from './components/admin/admin.component';
+import {EditPostComponent} from "./components/edit-post/edit-post.component";
 
 const appRoutes: Routes = [{path: '', component: PostsComponent},
   {path: 'posts/:id', component: PostDetailComponent},
   {path: 'add-post', component: AddPostComponent, canActivate: [AuthGuardService]},
   {path: 'add-certification', component: AddCertificationComponent, canActivate: [AuthGuardService]},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuardService]},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'posts/:id/edit', component: EditPostComponent, canActivate: [AuthGuardService]},
 ];
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -51,7 +53,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     CertificationsComponent,
     LoginComponent,
     ContributionActivityComponent,
-    AdminComponent
+    AdminComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,

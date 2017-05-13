@@ -1,7 +1,7 @@
 <section class="about section">
   <div class="section-inner">
     <div class="post">
-      <h2 class="heading">{{ post.title }}</h2>
+      <h2 class="heading">{{ post.title }}</h2><a [routerLink]="['/posts', post.id, 'edit']" *ngIf="authService.isAuthenticated()">Edit</a>
       <div class="description">{{ post.postedOn | date:'dd.MM.yyyy' }}</div>
     </div>
     <hr class="divider"/>
