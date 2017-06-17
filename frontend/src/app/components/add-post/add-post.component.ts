@@ -25,10 +25,11 @@ export class AddPostComponent implements OnInit {
   ngOnInit() {
     this.getPosts();
     jQuery('#summernote').summernote({height: 300});
+    this.updatePreviewContent();
   }
 
   getPosts() {
-    return this.http.get('http://localhost:8080/api/posts')
+    return this.http.get('/api/posts')
       .toPromise()
       .then(resp => this.posts = resp.json())
       .catch(err => console.log(err));
@@ -36,10 +37,20 @@ export class AddPostComponent implements OnInit {
 
   savePost() {
     this.newPost.content = jQuery('#summernote').summernote('code');
-    this.authHttp.post('http://localhost:8080/api/posts', this.newPost)
+    this.authHttp.post('/api/posts', this.newPost)
       .toPromise()
       .then(resp => {
         this.router.navigate(['/posts', resp.json().id]);
       });
+  }
+
+  preview() {
+    this.router.navigate(['/posts', 'preview']);
+  }
+
+  updatePreviewContent() {
+    setInterval(() => {         //replaced function() by ()=>
+      this.newPost.content = jQuery('#summernote').summernote('code');
+    }, 500);
   }
 }

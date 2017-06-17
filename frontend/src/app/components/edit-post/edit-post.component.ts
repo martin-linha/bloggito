@@ -5,6 +5,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import {Post} from "../../model/post";
 import {AuthHttp} from 'angular2-jwt';
+import {environment} from '../../../environments/environment';
 
 declare var jQuery: any;
 
@@ -27,7 +28,7 @@ export class EditPostComponent implements OnInit {
   }
 
   getPost() {
-    return this.http.get('http://localhost:8080/api/posts/' + +this.route.snapshot.params['id'])
+    return this.http.get('/api/posts/' + +this.route.snapshot.params['id'])
       .toPromise()
       .then(resp => {
         this.editPost = resp.json();
@@ -38,7 +39,7 @@ export class EditPostComponent implements OnInit {
 
   savePost() {
     this.editPost.content = jQuery('#summernote').summernote('code');
-    this.authHttp.post('http://localhost:8080/api/posts/' + this.editPost.id + '/edit', this.editPost)
+    this.authHttp.post('/api/posts/' + this.editPost.id + '/edit', this.editPost)
       .toPromise()
       .then(resp => {
         this.router.navigate(['/posts', resp.json().id]);

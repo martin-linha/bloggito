@@ -25,7 +25,7 @@ export class CommentsComponent implements OnInit {
   }
 
   save() {
-    this.http.post('http://localhost:8080/api/posts/' + this.post.id + '/comment', this.comment)
+    this.http.post('/api/posts/' + this.post.id + '/comment', this.comment)
       .toPromise()
       .then(resp => {
         this.commentAdded.emit();

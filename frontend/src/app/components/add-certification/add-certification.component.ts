@@ -22,7 +22,7 @@ export class AddCertificationComponent implements OnInit {
   }
 
   save() {
-    this.authHttp.post('http://localhost:8080/api/certifications', this.certification)
+    this.authHttp.post('/api/certifications', this.certification)
       .toPromise()
       .then(resp => {
         this.certificationService.certificationEmmiter.emit();

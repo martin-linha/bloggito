@@ -25,7 +25,7 @@ export class CertificationsComponent implements OnInit {
   }
 
   getCertifications() {
-    return this.http.get('http://localhost:8080/api/certifications')
+    return this.http.get('/api/certifications')
       .toPromise()
       .then(resp => this.certifications = resp.json())
       .catch(err => console.log(err));

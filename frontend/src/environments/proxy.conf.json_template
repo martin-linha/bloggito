@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "${apiUrl}",
+    "secure": false
+  }
+}

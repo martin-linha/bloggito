@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
   }
 
   getPosts() {
-    return this.http.get('http://localhost:8080/api/posts')
+    return this.http.get('/api/posts')
       .toPromise()
       .then(resp => this.posts = resp.json())
       .catch(err => console.log(err));

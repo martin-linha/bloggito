@@ -1,10 +1,12 @@
 <section class="about section">
   <div class="section-inner">
     <div class="content">
+      <h2>Post detail</h2>
       <form (ngSubmit)="savePost()" #postForm="ngForm">
-        <div class="form-group" [class.has-error]="title.errors && (title.dirty || title.touched)" >
+        <div class="form-group" [class.has-error]="title.errors && (title.dirty || title.touched)">
           <label for="title">Title*</label>
-          <input type="text" class="form-control"  id="title" name="title" [(ngModel)]="newPost.title" #title="ngModel" required>
+          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newPost.title" #title="ngModel"
+                 required>
         </div>
         <div class="form-group">
           <label for="perex">Perex</label>
@@ -15,7 +17,20 @@
           <div id="summernote"></div>
         </div>
         <button type="submit" class="btn btn-success" [disabled]="!postForm.form.valid">Submit</button>
+        <button type="button" class="btn btn-success" [disabled]="!postForm.form.valid" (click)="preview()">Preview
+        </button>
       </form>
+      <h2>Post preview</h2>
+      <div class="post">
+        <h2 class="heading">{{ newPost.title }}</h2>
+      </div>
+      <hr class="divider"/>
+      <div class="perex">
+        {{ newPost.perex }}
+      </div>
+      <div class="content" [innerHTML]="newPost.content">
+      </div><!--//content-->
+      <hr class="divider"/>
     </div>
   </div>
 </section>

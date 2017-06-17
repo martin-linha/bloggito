@@ -1,6 +1,5 @@
 package com.martinlinha.bloggito.service.impl;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.martinlinha.bloggito.persistance.dao.UserDao;
 import com.martinlinha.bloggito.persistance.entity.UserDetail;
 import com.martinlinha.bloggito.service.UserService;
@@ -9,17 +8,15 @@ import com.martinlinha.bloggito.service.domain.GithubRepoDetail;
 import com.martinlinha.bloggito.service.domain.StackOverflowDetail;
 import com.martinlinha.bloggito.util.HttpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
@@ -35,6 +32,10 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
 
     @Autowired
     private UserDao userDao;
+    @Value("${bloggito.github.username}")
+    private String githubUsername;
+    @Value("${bloggito.github.password}")
+    private String githubPassword;
 
     private String aaa;
 
@@ -97,19 +98,19 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<UserDetail, Long> i
 
     private boolean updateGithub() {
         try {
+            String githubUrl = String.format("https://api.github.com/repos/%s/", githubUsername);
             userDao.findAll().forEach(user -> {
                 RestTemplate template = new RestTemplate();
-                GithubRepo[] repos = template.getForObject("https://api.github.com/users/martin-linha/repos", GithubRepo[].class);
+                GithubRepo[] repos = template.getForObject(String.format("https://api.github.com/users/%s/repos", githubUsername), GithubRepo[].class);
                 user.getGithubAccount().setRepoCount(repos.length);
                 user.getGithubAccount().setCommitCount(Arrays.stream(repos)
                         .map(GithubRepo::getName)
                         .mapToInt(repoName -> {
-                            // TODO: implement exception handling. When requested for the first time, endpoint returns empty response.
-                            System.out.println("Deserializing https://api.github.com/repos/martin-linha/" + repoName + "/stats/contributors");
+                            System.out.println("Deserializing " + githubUrl + repoName + "/stats/contributors");
 
                             ResponseEntity<GithubRepoDetail[]> contributions = new RestTemplate()
-                                    .exchange("https://api.github.com/repos/martin-linha/"
-                                            + repoName + "/stats/contributors", HttpMethod.GET, new HttpEntity<GithubRepoDetail[]>(HttpUtils.createHeaders("martin-linha", "")), GithubRepoDetail[].class);
+                                    .exchange(githubUrl
+                                            + repoName + "/stats/contributors", HttpMethod.GET, new HttpEntity<GithubRepoDetail[]>(HttpUtils.createHeaders(githubUsername, githubPassword)), GithubRepoDetail[].class);
 
                             return Arrays.stream(contributions.getBody())
                                     .filter(detail -> user.getGithubAccount().getGithubId().equals(detail.getAuthorId()))

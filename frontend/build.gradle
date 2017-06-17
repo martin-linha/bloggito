@@ -2,6 +2,16 @@ plugins {
   id "com.moowork.node" version "1.1.1"
 }
 
+task processResources {
+  doLast {
+    copy {
+      from 'src/environments/proxy.conf.json_template'
+      into 'build'
+      rename 'proxy.conf.json_template', 'proxy.conf.json'
+      expand apiUrl: project.hasProperty('apiUrl') ? project.property('apiUrl') : 'http://localhost:8080'
+    }
+  }
+}
 
 task run {
 
@@ -16,4 +26,5 @@ node {
 }
 
 run.dependsOn npm_start
+npm_start.dependsOn processResources
 npm_start.dependsOn npmInstall

@@ -20,8 +20,13 @@ repositories {
 }
 
 processResources {
+    if (!project.hasProperty('githubPassword')) {
+        throw new GradleException('Please provide -P githubPassword parameter to your build.')
+    }
     filesMatching("**/application.yml") {
-        expand profile: project.hasProperty('profile') ? project.property('profile') : 'development'
+        expand profile: project.hasProperty('profile') ? project.property('profile') : 'development',
+                secretKey: project.hasProperty('secretKey') ? project.property('secretKey') : 'secretkey',
+                githubPassword: project.property('githubPassword')
     }
 }
 

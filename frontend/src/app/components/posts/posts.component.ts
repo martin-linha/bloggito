@@ -23,14 +23,14 @@ export class PostsComponent implements OnInit {
   }
 
   getPosts() {
-    return this.http.get('http://localhost:8080/api/posts')
+    return this.http.get('/api/posts')
       .toPromise()
       .then(resp => this.posts = resp.json())
       .catch(err => console.log(err));
   }
 
   savePost() {
-      this.http.post('http://localhost:8080/api/posts', this.newPost)
+      this.http.post('/api/posts', this.newPost)
         .toPromise()
         .then(resp => {
           this.getPosts()

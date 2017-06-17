@@ -17,7 +17,31 @@ bloggito:
   session-ttl: 60
   github:
     update-interval: 0 1,13 * * *
+    username: martin-linha
+    password: ${githubPassword}
   stackoverflow:
     update-interval: 0 1,13 * * *
   jwt:
-    secretkey: secretkey
+    secretkey: ${secretKey}
+---
+spring:
+  profiles: development
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bloggito
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+server:
+  contextPath: /api
+bloggito:
+  session-ttl: 60
+  github:
+    update-interval: 0 1,13 * * *
+    username: martin-linha
+  stackoverflow:
+    update-interval: 0 1,13 * * *
+  jwt:
+    secretkey: ${secretKey}

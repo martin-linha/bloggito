@@ -21,7 +21,7 @@ export class ContributionActivityComponent implements OnInit {
   }
 
   getUserDetail() {
-    this.http.get('http://localhost:8080/api/user/' + encodeURI(this.email))
+    this.http.get('/api/user/' + encodeURI(this.email))
       .toPromise()
       .then(resp => {
         this.user = resp.json();
