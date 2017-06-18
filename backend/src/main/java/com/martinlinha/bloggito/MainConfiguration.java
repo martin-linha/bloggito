@@ -17,4 +17,5 @@ public class MainConfiguration {
     public static void main(String[] args) {
         SpringApplication.run(MainConfiguration.class, args);
     }
+
 }
