@@ -33,7 +33,7 @@ bloggito:
     secretkey: ${secretKey}
 ---
 spring:
-  profiles: development
+  profiles: production
   datasource:
     url: jdbc:postgresql://localhost:5432/bloggito
     username: ${postgresUsername}
@@ -41,7 +41,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
 server:
   contextPath: /api
   port: ${serverPort}
