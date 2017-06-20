@@ -36,8 +36,8 @@ spring:
   profiles: development
   datasource:
     url: jdbc:postgresql://localhost:5432/bloggito
-    username: postgres
-    password: postgres
+    username: ${postgresUsername}
+    password: ${postgresPassword}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

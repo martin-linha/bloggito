@@ -29,7 +29,9 @@ processResources {
                 githubPassword: project.property('githubPassword'),
                 actuatorName: project.hasProperty('actuatorName') ? project.property('actuatorName') : 'admin',
                 actuatorPassword: project.hasProperty('actuatorPassword') ? project.property('actuatorPassword') : 'admin',
-                serverPort: project.hasProperty('serverPort') ? project.property('serverPort') : '8080'
+                serverPort: project.hasProperty('serverPort') ? project.property('serverPort') : '8080',
+                postgresUsername: project.hasProperty('postgresUsername') ? project.property('postgresUsername') : 'postgres',
+                postgresPassword: project.hasProperty('postgresPassword') ? project.property('postgresPassword') : 'postgres'
     }
 }
 
