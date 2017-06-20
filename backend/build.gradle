@@ -26,13 +26,19 @@ processResources {
     filesMatching("**/application.yml") {
         expand profile: project.hasProperty('profile') ? project.property('profile') : 'development',
                 secretKey: project.hasProperty('secretKey') ? project.property('secretKey') : 'secretkey',
-                githubPassword: project.property('githubPassword')
+                githubPassword: project.property('githubPassword'),
+                actuatorName: project.hasProperty('actuatorName') ? project.property('actuatorName') : 'admin',
+                actuatorPassword: project.hasProperty('actuatorPassword') ? project.property('actuatorPassword') : 'admin',
+                serverPort: project.hasProperty('serverPort') ? project.property('serverPort') : '8080',
+
     }
 }
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-security')
 
     runtime('org.postgresql:postgresql')
 

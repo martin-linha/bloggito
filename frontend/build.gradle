@@ -26,5 +26,5 @@ node {
 }
 
 run.dependsOn npm_start
-npm_start.dependsOn processResources
+npmInstall.dependsOn processResources
 npm_start.dependsOn npmInstall

@@ -13,14 +13,22 @@ spring:
       ddl-auto: create-drop
 server:
   contextPath: /api
+  port: 8080
+endpoints:
+  shutdown:
+    enabled: true
+security:
+  user:
+    name: admin
+    password: admin
 bloggito:
   session-ttl: 60
   github:
-    update-interval: 0 1,13 * * *
+    update-interval: 0 1,13 * * * *
     username: martin-linha
     password: ${githubPassword}
   stackoverflow:
-    update-interval: 0 1,13 * * *
+    update-interval: 0 1,13 * * * *
   jwt:
     secretkey: ${secretKey}
 ---
@@ -36,12 +44,17 @@ spring:
       ddl-auto: create-drop
 server:
   contextPath: /api
+  port: ${serverPort}
+security:
+  user:
+    name: ${actuatorName}
+    password: ${actuatorPassword}
 bloggito:
   session-ttl: 60
   github:
-    update-interval: 0 1,13 * * *
+    update-interval: 0 1,13 * * * *
     username: martin-linha
   stackoverflow:
-    update-interval: 0 1,13 * * *
+    update-interval: 0 1,13 * * * *
   jwt:
     secretkey: ${secretKey}
