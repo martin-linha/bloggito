@@ -54,6 +54,7 @@ bloggito:
   github:
     update-interval: 0 1,13 * * * *
     username: martin-linha
+    password: ${githubPassword}
   stackoverflow:
     update-interval: 0 1,13 * * * *
   jwt:
