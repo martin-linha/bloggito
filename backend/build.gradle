@@ -52,6 +52,7 @@ dependencies {
 
 springBoot {
     mainClass = "com.martinlinha.bloggito.MainConfiguration"
+    executable = true
 }
 
 task run(dependsOn: bootRun) {}
