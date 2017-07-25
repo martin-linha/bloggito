@@ -60,4 +60,4 @@ bloggito:
   jwt:
     secretkey: ${secretKey}
 logging:
-  file: ${HOME}/bloggito/bloggito.log
+  file: ${loggingDir}/bloggito.log

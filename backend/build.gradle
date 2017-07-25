@@ -31,7 +31,8 @@ processResources {
                 actuatorPassword: project.hasProperty('actuatorPassword') ? project.property('actuatorPassword') : 'admin',
                 serverPort: project.hasProperty('serverPort') ? project.property('serverPort') : '8080',
                 postgresUsername: project.hasProperty('postgresUsername') ? project.property('postgresUsername') : 'postgres',
-                postgresPassword: project.hasProperty('postgresPassword') ? project.property('postgresPassword') : 'postgres'
+                postgresPassword: project.hasProperty('postgresPassword') ? project.property('postgresPassword') : 'postgres',
+                loggingDir: project.hasProperty('loggingDir') ? project.property('loggingDir') : "${System.getProperty('user.home')}/bloggito"
     }
 }
 
