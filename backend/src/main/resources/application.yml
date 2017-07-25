@@ -45,10 +45,6 @@ spring:
 server:
   contextPath: /api
   port: ${serverPort}
-security:
-  user:
-    name: ${actuatorName}
-    password: ${actuatorPassword}
 bloggito:
   session-ttl: 60
   github:
