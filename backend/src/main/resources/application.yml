@@ -17,10 +17,6 @@ server:
 endpoints:
   shutdown:
     enabled: true
-security:
-  user:
-    name: admin
-    password: admin
 bloggito:
   session-ttl: 60
   github:
