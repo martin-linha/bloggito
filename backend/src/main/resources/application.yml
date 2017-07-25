@@ -59,3 +59,5 @@ bloggito:
     update-interval: 0 1,13 * * * *
   jwt:
     secretkey: ${secretKey}
+logging:
+  file: ${HOME}/bloggito/bloggito.log
