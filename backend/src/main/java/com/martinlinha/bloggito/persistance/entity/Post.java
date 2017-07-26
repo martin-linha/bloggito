@@ -20,6 +20,8 @@ public class Post extends AbstractEntity {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private String content;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private String perex;
     private Date postedOn;
     @ManyToOne
